@@ -1,2 +1,2 @@
 # pr-playlist_designer
-A playlist maker for hosting dedicated servers for Project Reclaimer
+A simple UI to manage your Halo 3 dedicated server playlists through a JSON editor for Project Reclaimer.
