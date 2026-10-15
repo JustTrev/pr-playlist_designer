@@ -1,5 +1,13 @@
 # pr-playlist_designer
 A simple UI to manage your Halo 3 dedicated server playlists through a JSON editor for Project Reclaimer.
 
-<img width="1085" height="742" alt="image" src="https://github.com/user-attachments/assets/fdbf3b79-962a-46a2-81f2-f7aa976873d9" />
+Hosting a dedicated server using a '_CustomPlaylist_.playlist.json' file requires 3 or more maps to be added. 
+
+You can assign any dedicated server to a specific playlist you create and set the type of game mode you want, with any parameters you want with it. 
+
+Simply use this tool to quickly create a playlist to your liking, and start hosting!
+
+_You can edit any playlist.json file reclaimer uses with this app._  
+
+<img width="1085" height="742" alt="image" src="https://github.com/user-attachments/assets/a6b3b422-d85e-4d24-ba37-01ceba3948e7" />
 
