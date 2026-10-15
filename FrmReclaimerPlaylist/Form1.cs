@@ -31,7 +31,8 @@ namespace FrmReclaimerPlaylist
         private TextBox txtPrimaryWeapon, txtSecondaryWeapon, txtMapWeapons;
         private NumericUpDown numTeams, numMinutes, numVehicles, numPickup, numGrenades, numAmmo;
         private Button btnSaveGame, btnCancelEdit;
-        private Label lblStatus;
+        private Label lblStatus; 
+        private CheckBox cbxDarkMode;
 
         public FrmReclaimerPlaylist()
         {
@@ -66,10 +67,21 @@ namespace FrmReclaimerPlaylist
             btnNew = new Button { Text = "New", Location = new Point(590, 9), Size = new Size(75, 28) };
             btnLoad = new Button { Text = "Load", Location = new Point(675, 9), Size = new Size(75, 28) };
             btnSave = new Button { Text = "Save Playlist", Location = new Point(760, 9), Size = new Size(110, 28) };
+            
 
             btnNew.Click += BtnNew_Click;
             btnLoad.Click += BtnLoad_Click;
             btnSave.Click += BtnSave_Click;
+
+            // Dark Mode checkbox (top-right corner)
+            cbxDarkMode = new CheckBox
+            {
+                Text = "Dark Mode",
+                AutoSize = true,
+                Location = new Point(topPanel.Width - 110, 14),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right
+            };
+            cbxDarkMode.CheckedChanged += cbxDarkMode_CheckedChanged;
 
             topPanel.Controls.Add(lblName);
             topPanel.Controls.Add(txtPlaylistName);
@@ -78,6 +90,7 @@ namespace FrmReclaimerPlaylist
             topPanel.Controls.Add(btnNew);
             topPanel.Controls.Add(btnLoad);
             topPanel.Controls.Add(btnSave);
+            topPanel.Controls.Add(cbxDarkMode);
 
             // ========== STATUS BAR ==========
             lblStatus = new Label
@@ -801,7 +814,99 @@ namespace FrmReclaimerPlaylist
             BuildUI();
             RefreshGameList();
             SetEditorEnabled(false);
+
+            // Apply saved theme
+            cbxDarkMode.Checked = Properties.Settings.Default.IsDarkMode;
+            ApplyTheme(Properties.Settings.Default.IsDarkMode);
         }
-         
+
+        private void cbxDarkMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxDarkMode.Checked != Properties.Settings.Default.IsDarkMode)
+            {
+                var ans = MessageBox.Show(
+                    "Application requires a restart. Do you want to continue?",
+                    ProductName,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (ans == DialogResult.Yes)
+                {
+                    Properties.Settings.Default.IsDarkMode = cbxDarkMode.Checked;
+                    Properties.Settings.Default.Save();
+                    ApplyTheme(Properties.Settings.Default.IsDarkMode);
+                    Application.Restart();
+                }
+                else
+                {
+                    cbxDarkMode.Checked = Properties.Settings.Default.IsDarkMode;
+                }
+            }
+        }
+
+        public static class ThemeColors
+        {
+            public static Color LightBackground = SystemColors.Control;
+            public static Color LightForeground = Color.Black;
+            public static Color DarkBackground = Color.FromArgb(45, 45, 48);
+            public static Color DarkForeground = Color.WhiteSmoke;
+        }
+
+        public void ApplyTheme(bool isDarkMode)
+        {
+            if (isDarkMode)
+            {
+                this.BackColor = ThemeColors.DarkBackground;
+                this.ForeColor = ThemeColors.DarkForeground;
+            }
+            else
+            {
+                this.BackColor = ThemeColors.LightBackground;
+                this.ForeColor = ThemeColors.LightForeground;
+            }
+
+            foreach (Control control in this.Controls)
+            {
+                ApplyThemeToControl(control, isDarkMode);
+            }
+        }
+
+        private void ApplyThemeToControl(Control control, bool isDarkMode)
+        {
+            // Skip the checkbox itself so it keeps readable colors
+            if (control == cbxDarkMode) return;
+
+            if (isDarkMode)
+            {
+                control.BackColor = ThemeColors.DarkBackground;
+                control.ForeColor = ThemeColors.DarkForeground;
+
+                // Make ListBox and TextBoxes a bit darker for better contrast
+                if (control is ListBox || control is TextBox || control is NumericUpDown || control is ComboBox)
+                {
+                    control.BackColor = Color.FromArgb(30, 30, 30);
+                    control.ForeColor = Color.WhiteSmoke;
+                }
+            }
+            else
+            {
+                control.BackColor = ThemeColors.LightBackground;
+                control.ForeColor = ThemeColors.LightForeground;
+
+                if (control is ListBox || control is TextBox || control is NumericUpDown || control is ComboBox)
+                {
+                    control.BackColor = SystemColors.Window;
+                    control.ForeColor = SystemColors.WindowText;
+                }
+            }
+
+            if (control.HasChildren)
+            {
+                foreach (Control child in control.Controls)
+                {
+                    ApplyThemeToControl(child, isDarkMode);
+                }
+            }
+        }
     }
 }
