@@ -1,9 +1,10 @@
-using System.Xml; 
+ï»¿using System.Xml;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace FrmReclaimerPlaylist
@@ -18,7 +19,7 @@ namespace FrmReclaimerPlaylist
         // Controls
         private TextBox txtPlaylistName;
         private NumericUpDown numVoteSeconds;
-        private Button btnNew, btnLoad, btnSave;
+        private Button btnNew, btnLoad, btnSave, btnAbout;
         private ListBox lstGames;
         private Button btnAddGame, btnRemoveGame, btnDuplicateGame;
         private GroupBox grpEditor;
@@ -31,8 +32,10 @@ namespace FrmReclaimerPlaylist
         private TextBox txtPrimaryWeapon, txtSecondaryWeapon, txtMapWeapons;
         private NumericUpDown numTeams, numMinutes, numVehicles, numPickup, numGrenades, numAmmo;
         private Button btnSaveGame, btnCancelEdit;
-        private Label lblStatus; 
+        private Label lblStatus;
         private CheckBox cbxDarkMode;
+        private Button btnEditGameType;
+        private ToolTip toolTip;
 
         public FrmReclaimerPlaylist()
         {
@@ -67,13 +70,20 @@ namespace FrmReclaimerPlaylist
             btnNew = new Button { Text = "New", Location = new Point(590, 9), Size = new Size(75, 28) };
             btnLoad = new Button { Text = "Load", Location = new Point(675, 9), Size = new Size(75, 28) };
             btnSave = new Button { Text = "Save Playlist", Location = new Point(760, 9), Size = new Size(110, 28) };
-            
 
             btnNew.Click += BtnNew_Click;
             btnLoad.Click += BtnLoad_Click;
             btnSave.Click += BtnSave_Click;
 
-            // Dark Mode checkbox (top-right corner)
+            btnAbout = new Button
+            {
+                Text = "About",
+                Location = new Point(880, 9),
+                Size = new Size(75, 28)
+            };
+            btnAbout.Click += BtnAbout_Click;
+            topPanel.Controls.Add(btnAbout);
+
             cbxDarkMode = new CheckBox
             {
                 Text = "Dark Mode",
@@ -97,7 +107,7 @@ namespace FrmReclaimerPlaylist
             {
                 Dock = DockStyle.Bottom,
                 Height = 26,
-                Text = "Ready – Add at least 3 games before saving.",
+                Text = "Ready â€“ Add at least 3 games before saving.",
                 BorderStyle = BorderStyle.Fixed3D,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Padding = new Padding(8, 0, 0, 0)
@@ -164,7 +174,7 @@ namespace FrmReclaimerPlaylist
             int fx = 155;
             int fw = 490;
 
-            // Map
+            // Map  (now supports .json / .map / .mvar)
             grpEditor.Controls.Add(new Label { Text = "Map:", Location = new Point(lx, y + 3), AutoSize = true });
             txtMap = new TextBox { Location = new Point(fx, y), Width = fw - 90 };
             grpEditor.Controls.Add(txtMap);
@@ -180,14 +190,29 @@ namespace FrmReclaimerPlaylist
             grpEditor.Controls.Add(txtGameName);
             y += 34;
 
-            // Game Type
-            grpEditor.Controls.Add(new Label { Text = "Game Type (.bin):", Location = new Point(lx, y + 3), AutoSize = true });
-            txtGameType = new TextBox { Location = new Point(fx, y), Width = fw - 90 };
+            // Game Type (.bin / .json only)
+            grpEditor.Controls.Add(new Label { Text = "Game Type:", Location = new Point(lx, y + 3), AutoSize = true });
+            txtGameType = new TextBox { Location = new Point(fx, y), Width = fw - 210 };
             grpEditor.Controls.Add(txtGameType);
 
-            btnBrowseGameType = new Button { Text = "Browse", Location = new Point(fx + fw - 85, y - 1), Size = new Size(80, 26) };
+            btnBrowseGameType = new Button
+            {
+                Text = "Browse",
+                Location = new Point(fx + fw - 205, y - 1),
+                Size = new Size(80, 26)
+            };
             btnBrowseGameType.Click += BtnBrowseGameType_Click;
             grpEditor.Controls.Add(btnBrowseGameType);
+
+            btnEditGameType = new Button
+            {
+                Text = "Edit Game Typeâ€¦",
+                Location = new Point(fx + fw - 120, y - 1),
+                Size = new Size(115, 26),
+                Enabled = false
+            };
+            btnEditGameType.Click += BtnEditGameType_Click;
+            grpEditor.Controls.Add(btnEditGameType);
             y += 34;
 
             // Preview Image
@@ -290,16 +315,62 @@ namespace FrmReclaimerPlaylist
             grpEditor.Controls.Add(btnSaveGame);
             grpEditor.Controls.Add(btnCancelEdit);
 
-            // Wire dirty tracking
             ResumeDirtyTracking();
 
-            // Add to form
             this.Controls.Add(grpEditor);
             this.Controls.Add(leftPanel);
             this.Controls.Add(topPanel);
             this.Controls.Add(lblStatus);
 
+            SetupToolTips();
+
             this.ResumeLayout(true);
+        }
+
+        private void SetupToolTips()
+        {
+            toolTip = new ToolTip
+            {
+                AutoPopDelay = 9000,
+                InitialDelay = 400,
+                ReshowDelay = 200,
+                ShowAlways = true
+            };
+
+            toolTip.SetToolTip(txtPlaylistName, "Name of the playlist shown on the voting screen.");
+            toolTip.SetToolTip(numVoteSeconds, "How many seconds players have to vote for the next game.");
+
+            toolTip.SetToolTip(txtMap, "Map name or Map Variant.\nSupported: .json, .map (extension stripped), .mvar");
+            toolTip.SetToolTip(btnBrowseMap, "Browse for a map file (.json / .map / .mvar).\n.map files automatically strip the extension.");
+
+            toolTip.SetToolTip(txtGameName, "Display name shown to players (e.g. SHOTTY SNIPERS).");
+
+            toolTip.SetToolTip(txtGameType, "Game type file.\nSupported: .bin (binary) and .json (scripted/editable)");
+            toolTip.SetToolTip(btnBrowseGameType, "Select a .bin or .json game type.");
+            toolTip.SetToolTip(btnEditGameType, "Opens the Game Type Editor.\nOnly available for .json files.");
+
+            toolTip.SetToolTip(txtPreviewImage, "Image shown in the voting screen.");
+            toolTip.SetToolTip(btnBrowsePreviewImage, "Select a preview image (.jpg, .png, .bmp).");
+
+            toolTip.SetToolTip(chkUseWeight, "Enable weighted random selection.");
+            toolTip.SetToolTip(numWeight, "Higher weight = more likely to be chosen.");
+            toolTip.SetToolTip(cmbSprint, "Sprint setting: off / unlimited / stamina");
+
+            toolTip.SetToolTip(numScoreToWin, "Score required to win. 0 = no limit.");
+            toolTip.SetToolTip(numKillPoints, "Points for a kill.");
+            toolTip.SetToolTip(numDeathPoints, "Points when you die.");
+            toolTip.SetToolTip(numSuicidePoints, "Points for suicide.");
+            toolTip.SetToolTip(numBetrayalPoints, "Points for betraying a teammate.");
+
+            toolTip.SetToolTip(numTeams, "0 = Free-for-All, 1 = Teams");
+            toolTip.SetToolTip(numMinutes, "Round time limit in minutes. 0 = no limit.");
+            toolTip.SetToolTip(numVehicles, "0 = none, 1 = enabled, 2 = all");
+            toolTip.SetToolTip(txtPrimaryWeapon, "Starting primary weapon (name or ID).");
+            toolTip.SetToolTip(txtSecondaryWeapon, "Starting secondary weapon (-1 = none).");
+            toolTip.SetToolTip(txtMapWeapons, "Weapons available on the map.");
+            toolTip.SetToolTip(numPickup, "Weapon pickup setting.");
+            toolTip.SetToolTip(numGrenades, "Grenade setting.");
+            toolTip.SetToolTip(numAmmo, "Ammo setting.");
         }
 
         private void MarkDirty(object sender, EventArgs e)
@@ -468,6 +539,9 @@ namespace FrmReclaimerPlaylist
             txtSecondaryWeapon.Text = "";
             txtMapWeapons.Text = "";
 
+            btnEditGameType.Enabled = false;
+            btnEditGameType.Tag = null;
+
             ResumeDirtyTracking();
 
             SetEditorEnabled(true);
@@ -600,7 +674,6 @@ namespace FrmReclaimerPlaylist
                 if (result == DialogResult.Yes)
                 {
                     BtnSaveGame_Click(null, null);
-
                     if (newIndex >= currentPlaylist.Games.Count)
                         newIndex = currentPlaylist.Games.Count - 1;
                 }
@@ -617,24 +690,38 @@ namespace FrmReclaimerPlaylist
             editingGame = currentPlaylist.Games[newIndex];
             PopulateEditor(editingGame);
             SetEditorEnabled(true);
-            lblStatus.Text = $"Editing: {editingGame.Map} – {editingGame.Name ?? editingGame.Game}";
+            lblStatus.Text = $"Editing: {editingGame.Map} â€“ {editingGame.Name ?? editingGame.Game}";
         }
+
+        // ==================== BROWSE METHODS (UPDATED) ====================
 
         private void BtnBrowseMap_Click(object sender, EventArgs e)
         {
             using (var ofd = new OpenFileDialog())
             {
-                ofd.Title = "Select Map";
-                ofd.Filter = "Map files (*.json;*.map)|*.json;*.map|All files (*.*)|*.*";
+                ofd.Title = "Select Map / Map Variant";
+                ofd.Filter =
+                    "Map files (*.json;*.map;*.mvar)|*.json;*.map;*.mvar|" +
+                    "JSON Map (*.json)|*.json|" +
+                    "Map (*.map)|*.map|" +
+                    "Map Variant (*.mvar)|*.mvar|" +
+                    "All files (*.*)|*.*";
                 ofd.FilterIndex = 1;
 
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    string extension = Path.GetExtension(ofd.FileName).ToLowerInvariant();
-                    if (extension == ".map")
+                    string ext = Path.GetExtension(ofd.FileName).ToLowerInvariant();
+
+                    if (ext == ".map")
+                    {
+                        // Project Reclaimer crashes if .map extension is kept
                         txtMap.Text = Path.GetFileNameWithoutExtension(ofd.FileName);
+                    }
                     else
+                    {
+                        // .json and .mvar keep the full filename
                         txtMap.Text = Path.GetFileName(ofd.FileName);
+                    }
                 }
             }
         }
@@ -644,11 +731,43 @@ namespace FrmReclaimerPlaylist
             using (var ofd = new OpenFileDialog())
             {
                 ofd.Title = "Select Game Type";
-                ofd.Filter = "Game Type files (*.bin)|*.bin|All files (*.*)|*.*";
+                ofd.Filter =
+                    "Game Types (*.bin;*.json)|*.bin;*.json|" +
+                    "Binary (*.bin)|*.bin|" +
+                    "Scripted (*.json)|*.json|" +
+                    "All files (*.*)|*.*";
                 ofd.FilterIndex = 1;
 
                 if (ofd.ShowDialog() == DialogResult.OK)
+                {
                     txtGameType.Text = Path.GetFileName(ofd.FileName);
+
+                    string ext = Path.GetExtension(ofd.FileName).ToLowerInvariant();
+                    bool isEditable = (ext == ".json");
+
+                    btnEditGameType.Enabled = isEditable;
+                    btnEditGameType.Tag = isEditable ? ofd.FileName : null;
+                }
+            }
+        }
+
+        private void BtnEditGameType_Click(object sender, EventArgs e)
+        {
+            string fullPath = btnEditGameType.Tag as string;
+
+            if (string.IsNullOrEmpty(fullPath) || !File.Exists(fullPath))
+            {
+                MessageBox.Show("Please select a valid .json game type first.", "No file",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // Pass the current dark mode state from the main form
+            bool isDark = cbxDarkMode.Checked;
+
+            using (var editor = new FrmGameTypeEditor(fullPath, isDark))
+            {
+                editor.ShowDialog(this);
             }
         }
 
@@ -658,8 +777,6 @@ namespace FrmReclaimerPlaylist
             {
                 ofd.Title = "Select Preview Image";
                 ofd.Filter = "Image files (*.jpg;*.jpeg;*.png;*.bmp)|*.jpg;*.jpeg;*.png;*.bmp|All files (*.*)|*.*";
-                ofd.FilterIndex = 1;
-
                 if (ofd.ShowDialog() == DialogResult.OK)
                     txtPreviewImage.Text = Path.GetFileName(ofd.FileName);
             }
@@ -674,7 +791,7 @@ namespace FrmReclaimerPlaylist
             {
                 string weight = g.Weight.HasValue ? $"  [w{g.Weight}]" : "";
                 string displayName = string.IsNullOrEmpty(g.Name) ? g.Game : g.Name;
-                lstGames.Items.Add($"{g.Map}  –  {displayName}{weight}");
+                lstGames.Items.Add($"{g.Map}  â€“  {displayName}{weight}");
             }
         }
 
@@ -684,7 +801,6 @@ namespace FrmReclaimerPlaylist
 
             try
             {
-                // Clear everything
                 txtMap.Text = "";
                 txtGameName.Text = "";
                 txtGameType.Text = "";
@@ -710,12 +826,20 @@ namespace FrmReclaimerPlaylist
                 txtSecondaryWeapon.Text = "";
                 txtMapWeapons.Text = "";
 
+                btnEditGameType.Enabled = false;
+                btnEditGameType.Tag = null;
+
                 if (g == null) return;
 
                 txtMap.Text = g.Map ?? "";
                 txtGameName.Text = g.Name ?? "";
                 txtGameType.Text = g.Game ?? "";
                 txtPreviewImage.Text = g.PreviewImage ?? "";
+
+                if (!string.IsNullOrEmpty(g.Game) && g.Game.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                {
+                    btnEditGameType.Enabled = true;
+                }
 
                 if (g.Weight.HasValue)
                 {
@@ -815,9 +939,24 @@ namespace FrmReclaimerPlaylist
             RefreshGameList();
             SetEditorEnabled(false);
 
-            // Apply saved theme
             cbxDarkMode.Checked = Properties.Settings.Default.IsDarkMode;
             ApplyTheme(Properties.Settings.Default.IsDarkMode);
+        }
+        private void BtnAbout_Click(object sender, EventArgs e)
+        {
+            string aboutText =
+        @"Project Reclaimer Playlist Designer
+
+A tool for creating and editing playlist files
+for Project Reclaimer.
+
+Created by xSoMuchPotx
+with assistance from Grok (xAI).
+
+Format reference:
+https://projectreclaimer.dev/host#playlists";
+
+            MessageBox.Show(aboutText, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cbxDarkMode_CheckedChanged(object sender, EventArgs e)
@@ -866,14 +1005,11 @@ namespace FrmReclaimerPlaylist
             }
 
             foreach (Control control in this.Controls)
-            {
                 ApplyThemeToControl(control, isDarkMode);
-            }
         }
 
         private void ApplyThemeToControl(Control control, bool isDarkMode)
         {
-            // Skip the checkbox itself so it keeps readable colors
             if (control == cbxDarkMode) return;
 
             if (isDarkMode)
@@ -881,7 +1017,6 @@ namespace FrmReclaimerPlaylist
                 control.BackColor = ThemeColors.DarkBackground;
                 control.ForeColor = ThemeColors.DarkForeground;
 
-                // Make ListBox and TextBoxes a bit darker for better contrast
                 if (control is ListBox || control is TextBox || control is NumericUpDown || control is ComboBox)
                 {
                     control.BackColor = Color.FromArgb(30, 30, 30);
@@ -903,9 +1038,7 @@ namespace FrmReclaimerPlaylist
             if (control.HasChildren)
             {
                 foreach (Control child in control.Controls)
-                {
                     ApplyThemeToControl(child, isDarkMode);
-                }
             }
         }
     }
