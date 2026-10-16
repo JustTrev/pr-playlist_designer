@@ -28,7 +28,7 @@ Set the necessary information you want, add a map (or type one), and select the 
 <img width="1059" height="642" alt="image" src="https://github.com/user-attachments/assets/f8b2c8a2-4754-4ff9-b693-0105c4803562" />
 
 
-Once a map and a gametype has been set, then you can click 'Save Game Type' to save your map to the playlist on the left.
+Once a map and gametype have been set, then click 'Save Game to Playlist' to add your map to the playlist on the left. Once a total of 3 or more have been created you can then click 'Save Playlist'.
 
 
 <img width="1047" height="608" alt="image" src="https://github.com/user-attachments/assets/c08fee0f-e2d3-4c51-b35c-d06d7bd9c107" />
