@@ -11,3 +11,4 @@ _You can edit any playlist.json file reclaimer uses with this app._
 
 <img width="1085" height="742" alt="image" src="https://github.com/user-attachments/assets/a6b3b422-d85e-4d24-ba37-01ceba3948e7" />
 
+<img width="1484" height="987" alt="image" src="https://github.com/user-attachments/assets/49ce19e6-c473-442e-9542-7aa9b6894b39" />
