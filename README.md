@@ -9,3 +9,4 @@ Simply use this tool to quickly create a playlist to your liking, and start host
 
 _You can edit any playlist.json file reclaimer uses with this app._   
 <img width="1484" height="987" alt="image" src="https://github.com/user-attachments/assets/49ce19e6-c473-442e-9542-7aa9b6894b39" />
+<img width="1083" height="736" alt="image" src="https://github.com/user-attachments/assets/1d87ee5f-676c-40da-bd97-25fdb1bb6f2f" />
