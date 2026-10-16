@@ -15,17 +15,18 @@ _You can edit any playlist.json file reclaimer uses with this app._
 
 
 
+The break down.
 
 **How-to-Use PR Playlist Designer:**
 
 To use this applet, get started by clicking 'New' to construct your favorite playlist.
 
-Set the necessary information you want, add a map, and set the gametype.
+Set the necessary information you want, add a map (or type one), and select the gametype or type one in yourself.
 
 <img width="1059" height="642" alt="image" src="https://github.com/user-attachments/assets/f8b2c8a2-4754-4ff9-b693-0105c4803562" />
 
 
-Once you have a game type selected you can click 'Save Game Type' to your playlist on the left.
+Once a map and a gametype has been set, then you can click 'Save Game Type' to save your map to the playlist on the left.
 
 
 Duplicate to create multiple versions of the same game type, or create new game types. Once you have 3 or more, you can save your playlist.
