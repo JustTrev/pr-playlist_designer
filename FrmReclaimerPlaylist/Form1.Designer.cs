@@ -33,12 +33,12 @@
             // 
             // FrmReclaimerPlaylist
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(398, 227);
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(364, 163);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FrmReclaimerPlaylist";
-            Text = "FrmReclaimerPlaylist";
+            Text = "PR Playlist Designer";
             Load += FrmReclaimerPlaylist_Load;
             ResumeLayout(false);
         }

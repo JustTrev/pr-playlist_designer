@@ -1,0 +1,7 @@
+H:\reclaimer\PR Playlist Designer\PRPlaylistDesigner.pdb
+H:\reclaimer\PR Playlist Designer\D3DCompiler_47_cor3.dll
+H:\reclaimer\PR Playlist Designer\PenImc_cor3.dll
+H:\reclaimer\PR Playlist Designer\PresentationNative_cor3.dll
+H:\reclaimer\PR Playlist Designer\vcruntime140_cor3.dll
+H:\reclaimer\PR Playlist Designer\wpfgfx_cor3.dll
+H:\reclaimer\PR Playlist Designer\PRPlaylistDesigner.exe

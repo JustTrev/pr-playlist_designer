@@ -6,27 +6,33 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PlatformTarget>x64</PlatformTarget>
-    <SignAssembly>False</SignAssembly>
-    <Title>Project Reclaimer Playlist Designer</Title>
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <Description>xSoMuchPotx 10/15/2026</Description>
-    <Copyright>xSoMuchPotx 10/15/2026</Copyright>
+    <Platforms>AnyCPU;x64</Platforms>
     <ApplicationIcon>map-icon_enhanced128x128.ico</ApplicationIcon>
-    <Product>Project Reclaimer Playlist Designer</Product>
-    <AssemblyName>ReclaimerPlaylistDesigner</AssemblyName>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>none</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>none</DebugType>
+    <Title>Project Reclaimer Playlist Designer</Title>
+    <Copyright>xSoMuchPot 10/15/2026</Copyright>
+    <PackageIcon>343GS.png</PackageIcon>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
+    <IncludeSymbols>False</IncludeSymbols>
+    <Description>A playlist maker for hosting dedicated servers for Project Reclaimer</Description>
+    <PackageProjectUrl>https://github.com/JustTrev/pr-playlist_designer</PackageProjectUrl>
+    <Authors>xSoMuchPot</Authors>
+    <Company>xSoMuchPotx</Company>
+    <Product>PR Playlist Designer</Product>
+    <PackageId>PRPlaylistDesigner</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyName>PRPlaylistDesigner</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Include="map-icon_enhanced128x128.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Pictures\343GS.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

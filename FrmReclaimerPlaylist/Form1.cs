@@ -166,7 +166,7 @@ namespace FrmReclaimerPlaylist
             {
                 Text = "Game Editor",
                 Dock = DockStyle.Fill,
-                Padding = new Padding(12, 10, 12, 10)
+                Padding = new Padding(6, 4, 6, 4)
             };
 
             int y = 28;
@@ -248,23 +248,23 @@ namespace FrmReclaimerPlaylist
             y += 26;
 
             grpEditor.Controls.Add(new Label { Text = "Score to Win:", Location = new Point(lx, y + 3), AutoSize = true });
-            numScoreToWin = new NumericUpDown { Location = new Point(110, y), Width = 65, Minimum = -1, Maximum = 1000, Value = 0 };
+            numScoreToWin = new NumericUpDown { Location = new Point(110, y), Width = 65, Minimum = -1, Maximum = 100000, Value = 0 };
             grpEditor.Controls.Add(numScoreToWin);
 
             grpEditor.Controls.Add(new Label { Text = "Kill Pts:", Location = new Point(195, y + 3), AutoSize = true });
-            numKillPoints = new NumericUpDown { Location = new Point(250, y), Width = 55, Minimum = -1, Maximum = 1000, Value = 0 };
+            numKillPoints = new NumericUpDown { Location = new Point(250, y), Width = 55, Minimum = -1, Maximum = 100000, Value = 0 };
             grpEditor.Controls.Add(numKillPoints);
 
             grpEditor.Controls.Add(new Label { Text = "Death Pts:", Location = new Point(325, y + 3), AutoSize = true });
-            numDeathPoints = new NumericUpDown { Location = new Point(395, y), Width = 55, Minimum = -1, Maximum = 1000, Value = 0 };
+            numDeathPoints = new NumericUpDown { Location = new Point(395, y), Width = 55, Minimum = -1, Maximum = 100000, Value = 0 };
             grpEditor.Controls.Add(numDeathPoints);
 
             grpEditor.Controls.Add(new Label { Text = "Suicide:", Location = new Point(470, y + 3), AutoSize = true });
-            numSuicidePoints = new NumericUpDown { Location = new Point(530, y), Width = 55, Minimum = -1, Maximum = 1000, Value = 0 };
+            numSuicidePoints = new NumericUpDown { Location = new Point(530, y), Width = 55, Minimum = -1, Maximum = 100000, Value = 0 };
             grpEditor.Controls.Add(numSuicidePoints);
 
             grpEditor.Controls.Add(new Label { Text = "Betrayal:", Location = new Point(605, y + 3), AutoSize = true });
-            numBetrayalPoints = new NumericUpDown { Location = new Point(665, y), Width = 55, Minimum = -1, Maximum = 1000, Value = 0 };
+            numBetrayalPoints = new NumericUpDown { Location = new Point(665, y), Width = 55, Minimum = -1, Maximum = 100000, Value = 0 };
             grpEditor.Controls.Add(numBetrayalPoints);
             y += 40;
 
@@ -302,6 +302,7 @@ namespace FrmReclaimerPlaylist
             numPickup = new NumericUpDown { Location = new Point(520, y), Width = 45, Minimum = -1, Maximum = 2, Value = 0 };
             numGrenades = new NumericUpDown { Location = new Point(575, y), Width = 45, Minimum = -1, Maximum = 2, Value = 0 };
             numAmmo = new NumericUpDown { Location = new Point(630, y), Width = 45, Minimum = -1, Maximum = 2, Value = 0 };
+
             grpEditor.Controls.Add(numPickup);
             grpEditor.Controls.Add(numGrenades);
             grpEditor.Controls.Add(numAmmo);
@@ -930,10 +931,10 @@ namespace FrmReclaimerPlaylist
 
         private void FrmReclaimerPlaylist_Load(object sender, EventArgs e)
         {
-            this.Text = "Project Reclaimer Playlist Designer";
+            this.Text = "PR Playlist Designer";
             this.Size = new Size(1100, 750);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.MinimumSize = new Size(1000, 650);
+            this.MinimumSize = new Size(1075, 650);
 
             BuildUI();
             RefreshGameList();

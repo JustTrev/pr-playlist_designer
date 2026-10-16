@@ -45,7 +45,7 @@ namespace FrmReclaimerPlaylist
             currentFilePath = filePath;
 
             this.Text = "Game Type Editor";
-            this.Size = new Size(1100, 780);
+            this.Size = new Size(900, 650);
             this.StartPosition = FormStartPosition.CenterParent;
             this.MinimumSize = new Size(900, 650);
 
