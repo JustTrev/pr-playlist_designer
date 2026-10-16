@@ -18,9 +18,9 @@ _You can edit any playlist.json file reclaimer uses with this app._
 
 **How-to-Use PR Playlist Designer:**
 
-To use this applet, you can get started by clicking 'New' to construct your favorite playlist.
+To use this applet, get started by clicking 'New' to construct your favorite playlist.
 
-Add the necessary information and add a map, and gametype.
+Set the necessary information you want, add a map, and set the gametype.
 
 <img width="1059" height="642" alt="image" src="https://github.com/user-attachments/assets/f8b2c8a2-4754-4ff9-b693-0105c4803562" />
 
