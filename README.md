@@ -60,11 +60,10 @@ Note:
 
 To use this applet, inside the Game Editor window, click 'Browse' next to 'Game Type' and locate one of the built in JSON template files located in 'c:\reclaimer\content\Game Modes\Project Reclaimer\' to get started (There is no default path it will open to at this time).
 
+
+<img width="790" height="730" alt="image" src="https://github.com/user-attachments/assets/f39ccf7f-3eaf-4460-98a1-81604b8f776c" />
 Bin files are associated with Halo 3's built in hopper system Project reclaimer will also use (you are unable to edit these bin files at this time).
-
-Use 'Load' to open a compatible JSON files. 
-
-
+ 
 <img width="993" height="724" alt="image" src="https://github.com/user-attachments/assets/550cad26-966e-4d95-85d6-3b2fc91a373a" />
 
 The 'Save As' button will write all of your settings as '[yourGameTypeName].json' to disk.  These are NOT to be used with PR Playlist Designer json files (ex. "[yourPlaylistName].playlist.json"). 
