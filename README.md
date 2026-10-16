@@ -28,14 +28,14 @@ Set the necessary information you want, add a map (or type one), and select the 
 <img width="1059" height="642" alt="image" src="https://github.com/user-attachments/assets/f8b2c8a2-4754-4ff9-b693-0105c4803562" />
 
 
-Once a map and gametype have been set, then click 'Save Game to Playlist' to add your map to the playlist on the left. Once a total of 3 or more have been created you can then click 'Save Playlist'.
+Once a map and gametype have been set, then click 'Save Game to Playlist' to add your map to the playlist on the left. Once you have a total of 3 or more maps added to the playlist, you can then click 'Save Playlist'.
 
 
 <img width="1047" height="608" alt="image" src="https://github.com/user-attachments/assets/c08fee0f-e2d3-4c51-b35c-d06d7bd9c107" />
 
 
 
-Duplicate to create multiple versions of the same game type, or create new game types. Once you have 3 or more, you can save your playlist.
+You can also duplicate these items to create multiple versions of the same game type, or create new multitudes of game variants.
 
 'Save Playlist' will write all of your settings as '[yourPlaylistName].playlist.json'.  These are NOT to be used with Game Type json files (ex. "faction-battlefront.json").
 
