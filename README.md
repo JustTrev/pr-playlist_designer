@@ -23,7 +23,7 @@ _You can edit any playlist.json file reclaimer uses with this app._
 To use this applet, get started by clicking 'New' to construct your favorite playlist.
 
 
-Set the necessary information you want, add a map (or type one), and select the gametype or type one in yourself.
+Set the necessary information you want, add a map (or type one), and select the gametype by clicking 'browse' or you can type one in yourself in the text field.
 
 <img width="1059" height="642" alt="image" src="https://github.com/user-attachments/assets/f8b2c8a2-4754-4ff9-b693-0105c4803562" />
 
