@@ -11,15 +11,17 @@ Simply use this tool to quickly create a playlist to your liking, and start host
 
 _You can edit any playlist.json file reclaimer uses with this app._   
 <img width="1484" height="987" alt="image" src="https://github.com/user-attachments/assets/49ce19e6-c473-442e-9542-7aa9b6894b39" />
-<img width="1083" height="736" alt="image" src="https://github.com/user-attachments/assets/1d87ee5f-676c-40da-bd97-25fdb1bb6f2f" />
 
 
 
-The break down.
+
+
 
 **How-to-Use PR Playlist Designer:**
 
+
 To use this applet, get started by clicking 'New' to construct your favorite playlist.
+
 
 Set the necessary information you want, add a map (or type one), and select the gametype or type one in yourself.
 
@@ -39,13 +41,15 @@ Duplicate to create multiple versions of the same game type, or create new game 
 
 
 
-Use 'Load' to open a compatible '[PlaylistName].playlist.json' file. 
+To load a playlist, click 'Load' to open a compatible '[PlaylistName].playlist.json' file. 
 
-It's best to save custom playlists in either "c:\reclaimer\playlists" or in any appropriate location under "c:\reclaimer\" reflected in your dedicated server configuration file. 
 
+<img width="986" height="657" alt="image" src="https://github.com/user-attachments/assets/61b72ea4-e7c2-44ef-9390-e735b8bdb742" />
+
+
+It's best to save custom playlists in either "c:\reclaimer\playlists" or in any appropriate location under "c:\reclaimer\" (reflected in your dedicated server configuration file). 
 
 Note:
-You can read/write to any location as long as you properly point your dedicated server to the location of your saved playlist file. 
  'c:\reclaimer\playlists' <- is the default location when hosting a dedicated server. You can change this in the dedicated server settings if your file is located elsewhere.
 
 
@@ -54,13 +58,16 @@ You can read/write to any location as long as you properly point your dedicated 
 
 **How-to-Use Game Type Editor:**
 
-To use this applet, inside the Game Editor window, click 'Browse' for 'Game Type' and locate one of the built in templates in 'c:\reclaimer\content\Game Modes\Project Reclaimer\' to get started (There is no default path it will open to at this time). When loading a file you have two choices, either a .bin file or JSON file.
+To use this applet, inside the Game Editor window, click 'Browse' next to 'Game Type' and locate one of the built in JSON template files located in 'c:\reclaimer\content\Game Modes\Project Reclaimer\' to get started (There is no default path it will open to at this time).
 
-Bin files are associated with Halo 3's built in hopper system, where as the json file allow users to fully customize any map for Halo 3 as an alternative to these bin files (you are unable to edit bin files at this time).
+Bin files are associated with Halo 3's built in hopper system Project reclaimer will also use (you are unable to edit these bin files at this time).
 
 Use 'Load' to open a compatible JSON files. 
 
-The 'Save' button will write all of your settings as '[yourGameTypeName].json' to disk.  These are NOT to be used with PR Playlist Designer json files (ex. "[yourPlaylistName].playlist.json"). 
+
+<img width="993" height="724" alt="image" src="https://github.com/user-attachments/assets/550cad26-966e-4d95-85d6-3b2fc91a373a" />
+
+The 'Save As' button will write all of your settings as '[yourGameTypeName].json' to disk.  These are NOT to be used with PR Playlist Designer json files (ex. "[yourPlaylistName].playlist.json"). 
 
 Please make sure you save these in a practical location for your dedicated server to work properly.
 
