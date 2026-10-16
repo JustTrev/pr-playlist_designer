@@ -76,8 +76,9 @@ Please make sure you save these in a practical location for your dedicated serve
 
 
 Note:
-It's best to save your playlist in either "c:\reclaimer\content\Game Modes\" or "c:\reclaimer\content\Game Modes\Project Reclaimer\" for your dedicated server. 
- 'c:\reclaimer\playlists' <- is the default location when hosting a dedicated server. You can change this in the dedicated server settings if your file is located elsewhere.
+It's best to save your playlist in either "c:\reclaimer\content\Game Modes\" or "c:\reclaimer\content\Game Modes\Project Reclaimer\" for your dedicated server's game types. 
+
+For your dedicated server to use this Playlist, its best to save them under 'c:\reclaimer\playlists' <- as this is the default location when hosting a dedicated server. You can change this in the dedicated server settings.
 
 
 
