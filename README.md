@@ -29,6 +29,10 @@ Set the necessary information you want, add a map (or type one), and select the 
 Once a map and a gametype has been set, then you can click 'Save Game Type' to save your map to the playlist on the left.
 
 
+<img width="1047" height="608" alt="image" src="https://github.com/user-attachments/assets/c08fee0f-e2d3-4c51-b35c-d06d7bd9c107" />
+
+
+
 Duplicate to create multiple versions of the same game type, or create new game types. Once you have 3 or more, you can save your playlist.
 
 'Save Playlist' will write all of your settings as '[yourPlaylistName].playlist.json'.  These are NOT to be used with Game Type json files (ex. "faction-battlefront.json").
