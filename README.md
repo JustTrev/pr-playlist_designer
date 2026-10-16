@@ -27,6 +27,7 @@ Set the necessary information you want, add a map (or type one), and select the 
 
 <img width="1059" height="642" alt="image" src="https://github.com/user-attachments/assets/f8b2c8a2-4754-4ff9-b693-0105c4803562" />
 
+<img width="790" height="730" alt="image" src="https://github.com/user-attachments/assets/f39ccf7f-3eaf-4460-98a1-81604b8f776c" />
 
 Once a map and gametype have been set, then click 'Save Game to Playlist' to add your map to the playlist on the left. Once you have a total of 3 or more maps added to the playlist, you can then click 'Save Playlist'.
 
@@ -53,7 +54,6 @@ Note:
  'c:\reclaimer\playlists' <- is the default location when hosting a dedicated server. You can change this in the dedicated server settings if your file is located elsewhere.
 
 
-<img width="790" height="730" alt="image" src="https://github.com/user-attachments/assets/f39ccf7f-3eaf-4460-98a1-81604b8f776c" />
 
 
 **How-to-Use Game Type Editor:**
